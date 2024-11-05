@@ -7,32 +7,12 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
 from .models import *
 from .serializers import *
-
-# Create your views here.
-def sayHello(request):
-    return HttpResponse('Hello, Django!')
 
 def index(request):
     return render(request, 'index.html', {})
 
-# class BookingView(APIView):
-#     '''
-#     List and Add Bookings
-#     '''
-#     def get(self, request):
-#         items = Booking.objects.all()
-#         serializer = BookingSerializer(items, many=True)
-#         return Response(serializer.data) # Return JSON data
-
-#     def post(self, request):
-#         serializer = BookingSerializer(data=request.data)
-
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response({"status": "success", "data": serializer.data})
 class UserViewSet(viewsets.ViewSet):
     '''
     List and Add User
@@ -83,13 +63,6 @@ class UserViewSet(viewsets.ViewSet):
         user = get_object_or_404(queryset, pk=pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-# class BookingView(ListCreateAPIView):
-#     '''
-#     List and Add Bookings
-#     '''
-#     queryset = Booking.objects.all()
-#     serializer_class = BookingSerializer
 
 class BookingView(viewsets.ModelViewSet):
     '''
@@ -144,29 +117,6 @@ class BookingView(viewsets.ModelViewSet):
         booking.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# class MenuItemView(APIView):
-#     '''
-#     List and Add Menu Items
-#     '''
-#     def get(self, request):
-#         items = Menu.objects.all()
-#         serializer = MenuSerializer(items, many=True)
-#         return Response(serializer.data) # Return JSON data
-
-#     def post(self, request):
-#         serializer = MenuSerializer(data=request.data)
-
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response({"status": "success", "data": serializer.data})
-
-# class MenuItemsView(ListCreateAPIView):
-#     '''
-#     List and Add Menu Items
-#     '''
-#     queryset = Menu.objects.all()
-#     serializer_class = MenuSerializer
-
 class MenuItemsView(viewsets.ModelViewSet):
     '''
     List and Add Menu Items
@@ -219,18 +169,3 @@ class MenuItemsView(viewsets.ModelViewSet):
         menu = get_object_or_404(queryset, pk=pk)
         menu.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-class SingleMenuItemView(RetrieveUpdateAPIView, DestroyAPIView):
-    '''
-    List, Update, and Delete a Menu Item
-    '''
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
-
-# class SingleMenuItemView(viewsets.ModelViewSet):
-#     '''
-#     List, Update, and Delete a Menu Item
-#     '''
-#     queryset = Menu.objects.all()
-#     serializer_class = MenuSerializer
-#     permission_classes = [IsAuthenticated]
