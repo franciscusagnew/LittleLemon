@@ -1,5 +1,5 @@
 # LittleLemon
 
-API paths to test
-/api/bookings/
-/api/registration/
+# API paths to test
+- /api/bookings/
+- /api/registration/
